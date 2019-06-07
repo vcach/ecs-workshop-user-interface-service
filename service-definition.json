@@ -1,0 +1,21 @@
+{
+    "cluster": "ecs-workshop-cluster",
+    "serviceName": "user-interface-service",
+    "taskDefinition": "ecs-workshop-user-interface-service",
+    "desiredCount": 1,
+    "launchType": "FARGATE",
+    "loadBalancers": [
+        {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:660116656816:targetgroup/ecs-w-UserI-14Q8MDI6HZLOA/b645e551d3ac548f",
+            "containerName": "user-interface-service-container",
+            "containerPort": 3000
+        }
+    ],
+    "networkConfiguration": {
+        "awsvpcConfiguration": {
+            "subnets": ["subnet-017b41d39b2a07a03", "subnet-047b14cf5f2355c7c"],
+            "securityGroups": ["sg-04d648800863697fb"],
+            "assignPublicIp": "ENABLED"
+        }
+    }
+}

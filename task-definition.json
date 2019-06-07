@@ -1,0 +1,60 @@
+{
+    "family": "ecs-workshop-user-interface-service",
+    "executionRoleArn": "arn:aws:iam::660116656816:role/ecs-workshop-FargateTaskExecutionRole-195TPUEACY11F",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": ["EC2", "FARGATE"],
+    "cpu": "512",
+    "memory": "1024",
+    "containerDefinitions": [
+        {
+            "name": "user-interface-service-container",
+            "image": "660116656816.dkr.ecr.us-east-1.amazonaws.com/ecs-workshop/user-interface-service:latest",
+            "essential": true,
+            "portMappings":[
+                {
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp"
+                }
+            ],
+            "environment":[
+                {
+                    "name": "AWS_REGION",
+                    "value": "us-east-1"
+                },
+                {
+                    "name": "IMAGE_BUCKET_NAME",
+                    "value": "ecs-workshop-images3bucket-1jsbaacpwfafo"
+                },
+                {
+                    "name": "USER_PROFILE_DDB_TABLE_NAME",
+                    "value": "ecs-workshop-UserProfileDdbTable-14EXNJ76G4F4W"
+                },
+                {
+                    "name": "CONTACTS_DDB_TABLE_NAME",
+                    "value": "ecs-workshop-ContactsDdbTable-1SG7852ZHJ0TB"
+                },
+                {
+                    "name": "COGNITO_USER_POOL_ID",
+                    "value": "us-east-1_RpurSLpOW"
+                },
+                {
+                    "name": "COGNITO_USER_POOL_CLIENT_ID",
+                    "value": "6ebs3qqgjbtkvf1emdueq54k58"
+                },
+                {
+                    "name": "AWS_COGNITO_IDENTITY_POOL_ID",
+                    "value": "us-east-1:0de1e8a2-df4c-49fa-be31-3cbca385d3e6"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "ecs-workshop/user-interface-service",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "user-interface-service"
+                }
+            }
+        }
+    ]
+}
